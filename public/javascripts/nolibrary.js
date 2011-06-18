@@ -96,8 +96,6 @@
       //TODO
     };
     
-    IN.Event.onOnce(IN, "systemReady", function() {search("terry")});
-    
     return {
       changeTemplate : function(markup) {
         
