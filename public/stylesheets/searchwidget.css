@@ -1,0 +1,61 @@
+/*
+.results-container {
+  width: 30em;
+}
+
+li.search-result {
+  float: left;
+  list-style-type:none;
+  width: 15em;
+  height: 80px;
+  overflow: hidden;
+  
+}
+
+.search-result .info {
+  float: right;
+  width: 40%;
+  overflow: hidden;
+}
+
+.search-result .picture {
+  
+} */
+
+html { margin: 0; padding: 0;}
+body { font-family: Arial, Helvetica, 'Nimbus Sans L', sans-serif; font-size: 13px; color: #333; margin: 0; padding: 10px; }
+a { color: #069; }
+a img { border: none; }
+
+
+/* SEARCH RESULTS */
+ul.search-results { margin: 20px 50px; overflow: hidden; }
+ul.search-results ol { list-style: none; padding: 0; }
+ul.search-results li.search-result { position: relative; float: left; width: 250px; height: 80px; overflow: hidden; border: 1px solid #CCC; margin: 15px 20px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.2); 
+  -moz-box-shadow: 0 1px 5px rgba(0,0,0,.2);
+  text-shadow: 0 1px 1px rgba(0,0,0,.3); 
+  background: -moz-linear-gradient(0% 0% 270deg, #FFF, #EEE 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#EEE));
+  padding: 10px 10px 10px 100px;
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  -moz-transition: -moz-transform 0.2s ease-in-out;
+}
+ul.search-results li.search-result .name { font-size: 18px; }
+ul.search-results li.search-result .name a { text-decoration: none; }
+ul.search-results li.search-result .distance { position: absolute; left: 5px; top: 5px; }
+ul.search-results li.search-result img.profile-photo { position: absolute; left: 10px; top: 10px; }
+ul.search-results li.search-result:hover { 
+  cursor: pointer;
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  background: -moz-linear-gradient(0% 0% 270deg, #FFF, #069 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#069));
+}
+ul.search-results li.search-result.clicked {
+  -webkit-transform: rotate(150deg) scale(0.1);
+  -moz-transform: rotate(150deg) scale(0.1);
+  z-index: 1000;
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Main</title>
+  <%= stylesheet_link_tag "" %>
+  <%= csrf_meta_tag %>
+  <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+    api_key: IMHFl1tuw97IypFWZqlLYdGBY7EtZWiIM-NHF5BvH2XwmcdUWZJiaIfFqp9lRqmU
+    authorize: true
+  </script>
+</head>
+<body>
+  
+  <script type="in/Login">
+  Hello, <?js= firstName ?> <?js= lastName ?>.
+  </script>
+
+  <h1>LinkedIn People Search Widget Example</h1>
+  <p><input type="text" placeholder="Search Person" size="50" id="li-search-widget"></input><input value="Search" type="submit" id="li-search-widget-submit"></p>
+  <div id="searchResults"></div>
+
+</body>
+<%= javascript_include_tag "search" %>
+</html>

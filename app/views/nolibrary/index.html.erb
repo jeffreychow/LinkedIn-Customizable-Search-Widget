@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Main</title>
+  <%= stylesheet_link_tag "searchwidget" %>
+  <%= csrf_meta_tag %>
+  <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+    api_key: IMHFl1tuw97IypFWZqlLYdGBY7EtZWiIM-NHF5BvH2XwmcdUWZJiaIfFqp9lRqmU
+    authorize: true
+  </script>
+</head>
+<body>
+  
+  <script type="in/Login">
+  Hello, <?js= firstName ?> <?js= lastName ?>.
+  </script>
+
+  <h1>LinkedIn People Search Widget Example  (No Library)</h1>
+  <p><form id="li-search-widget"><input type="text" placeholder="Search Person" size="50" id="li-keyword-input"></input><input value="Search" type="submit" id="li-search-widget-submit"/></form></p>
+  <ul id="searchResults" class="search-results">
+    <li id="resultTemplate" class="search-result" style="display:none">
+      <div class="info">
+        <p><a data-li="publicProfileUrl" class="li-field name"><span data-li="firstName" class="li-field"></span>&nbsp;<span data-li="lastName" class="li-field"></span></a></p>
+        <p><span data-li="headline" class="li-field headline"></span></p>
+      </div>
+      <div class="picture">
+        <img data-li="pictureUrl" class="li-field profile-photo"></img>
+      </div>
+    </li>
+  </ul>
+
+</body>
+<%= javascript_include_tag "nolibrary" %>
+</html>
