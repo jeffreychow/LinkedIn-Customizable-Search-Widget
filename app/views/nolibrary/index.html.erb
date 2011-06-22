@@ -5,7 +5,7 @@
   <%= stylesheet_link_tag "searchwidget" %>
   <%= csrf_meta_tag %>
   <script type="text/javascript" src="http://platform.linkedin.com/in.js">
-    api_key: _CUyAHWf8AxyLaX1rNOXp96n5tvRnPPjX7BQvmR0xUmQ384EIdEI4uInvW2l6goQ
+    api_key: <%= js_apikey %>
     authorize: true
   </script>
 </head>
@@ -18,7 +18,7 @@
   <h1>LinkedIn People Search Widget Example  (No Library)</h1>
   <p><form id="li-search-widget"><input type="text" placeholder="Search Person" size="50" id="li-keyword-input"></input><input value="Search" type="submit" id="li-search-widget-submit"/></form></p>
   <ul id="searchResults" class="search-results">
-    <li id="resultTemplate" class="search-result" style="display:none" draggable="true">
+    <li id="resultTemplate" class="search-result" style="display:none">
       <div class="info">
         <p><a data-li="publicProfileUrl" class="li-field name"><span data-li="firstName" class="li-field"></span>&nbsp;<span data-li="lastName" class="li-field"></span></a></p>
         <p><span data-li="headline" class="li-field headline"></span></p>
@@ -31,6 +31,8 @@
   </ul>
 
   <div id="drop"></div>
+  <textarea id="template"></textarea>
+  <input id="changeTemplateButton" type="button" value="Change template"></input>
 </body>
-<%= javascript_include_tag "nolibrary" %>
+<%= javascript_include_tag "nolibrary" , "demo" %>
 </html>

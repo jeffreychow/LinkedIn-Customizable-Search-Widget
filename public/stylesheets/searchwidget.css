@@ -67,3 +67,8 @@ ul.search-results li.search-result.clicked {
   margin: 10px;
   padding: 10px;
 }
+
+#template {
+  width: 400px;
+  height: 200px;
+}

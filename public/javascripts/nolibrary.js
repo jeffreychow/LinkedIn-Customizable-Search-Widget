@@ -2,7 +2,7 @@
   
   var getEl = function(id){return document.getElementById(id)};
   
-  function SearchWidget(config) {
+  window.LISearchWidget = function (config) {
     config.inputFieldId = config.inputFieldId || '';
     config.inputButtonId = config.inputButtonId || '';
     config.typeahead = (config.typeahead === true);
@@ -23,7 +23,12 @@
       }
     };
     // Callback for handling search results
+    var _currentSearchResults = null;
     function handlePeopleSearch(peopleSearchResult) {
+      if(!peopleSearchResult) {
+        return;
+      }
+      _currentSearchResults = peopleSearchResult;
       _resultsContainerEl.innerHTML = '';
       var members = peopleSearchResult.people.values;
       if(members) { 
@@ -46,9 +51,15 @@
             }
           }
           nodesToRemove.forEach(function(node){node.parentNode.removeChild(node);});
-        
+          
           // Add new node to container element
           _resultsContainerEl.appendChild(newNode);
+          // add DD behavior
+          newNode.setAttribute('draggable', 'true');
+          newNode.addEventListener('dragstart', function (e) {
+            e.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
+            e.dataTransfer.setData('Text', member.id); // required otherwise doesn't work
+          }, false);
         });
       }      
       if(config.typeahead && _searchQueue) {
@@ -97,23 +108,14 @@
     };
     
     return {
-      changeTemplate : function(markup) {
-        
+      getCurrentResultsObj : function() {
+        return _currentSearchResults;
+      },
+      render: function(resultObj) {
+        handlePeopleSearch(resultObj);
       }
     }
   }
-
-
-  
-  var widget = new SearchWidget({
-    formId: "li-search-widget",
-    inputFieldId : "li-keyword-input",
-    inputButtonId : "li-search-widget-submit",
-    typeahead : true,
-    resultsContainerId: "searchResults",
-    templateId: "resultTemplate",
-    templateFieldMarker: "li-field"
-  });
   
   
 })();
