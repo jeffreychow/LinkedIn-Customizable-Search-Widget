@@ -16,7 +16,7 @@
   </script>
 
   <h1>LinkedIn People Search Widget Example  (No Library)</h1>
-  <p><form id="li-search-widget"><input type="text" placeholder="Search Person" size="50" id="li-keyword-input"></input><input value="Search" type="submit" id="li-search-widget-submit"/></form></p>
+  <p><form id="li-search-widget"><input type="text" placeholder="Search Person" size="50" id="li-keyword-input" autocomplete="off"></input><input value="Search" type="submit" id="li-search-widget-submit"/></form></p>
   <ul id="searchResults" class="search-results">
     <li id="resultTemplate" class="search-result" style="display:none">
       <div class="info">
@@ -30,9 +30,11 @@
     </li>
   </ul>
 
-  <div id="drop"></div>
+  <div id="overlay">
+  <ul id="drop" class="search-results"></ul>
   <textarea id="template"></textarea>
   <input id="changeTemplateButton" type="button" value="Change template"></input>
+  </div>
 </body>
 <%= javascript_include_tag "nolibrary" , "demo" %>
 </html>

@@ -39,7 +39,20 @@
           for(var i=0,len=fields.length;i<len;i++) {
             var node = fields[i],
                 nodeTagName = node.tagName.toLowerCase(),
-                data = member[node.getAttribute('data-li')];
+                dataFieldToFetch = node.getAttribute('data-li'),
+                dataFields = dataFieldToFetch.split('.'),
+                data;
+            if(dataFields.length>1) {
+              data = member;
+              for(var j=0, jlen = dataFields.length; j<jlen; j++) {
+                if(!data) {
+                  break;
+                }
+                data = data[dataFields[j]];
+              }
+            } else {
+              data = member[dataFields[0]];
+            }
             if(!data) {
               nodesToRemove.push(node);
               continue;
@@ -55,10 +68,9 @@
           // Add new node to container element
           _resultsContainerEl.appendChild(newNode);
           // add DD behavior
-          newNode.setAttribute('draggable', 'true');
           newNode.addEventListener('dragstart', function (e) {
             e.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
-            e.dataTransfer.setData('Text', member.id); // required otherwise doesn't work
+            e.dataTransfer.setData('Text', newNode.innerHTML); // required otherwise doesn't work
           }, false);
         });
       }      
@@ -78,13 +90,14 @@
     };
     
     if(config.typeahead) {
-      getEl(config.inputFieldId).addEventListener('keyup', function(evt) {
+      var keyupListener = function(evt) {
         if(!_searchQueue) {
           search(getEl(config.inputFieldId).value);
         } else {
           _searchQueue = function() {search(getEl(config.inputFieldId).value);};
         }
-      }, false);
+      };
+      getEl(config.inputFieldId).addEventListener('keyup', keyupListener, false);
     }
     
     /***
@@ -93,7 +106,10 @@
     var fields = _resultTemplateNode.getElementsByClassName(config.templateFieldMarker);
     var fieldsToFetch = [];
     for(var i=0,len=fields.length;i<len;i++) {
-      fieldsToFetch[i] = fields[i].getAttribute('data-li');
+      var field = fields[i].getAttribute('data-li');
+      if(field) {
+        fieldsToFetch[i] = field.split('.')[0]; 
+      }
     }
     function search(input) {
         IN.API.PeopleSearch()
@@ -113,6 +129,13 @@
       },
       render: function(resultObj) {
         handlePeopleSearch(resultObj);
+      },
+      destroy: function() {
+        getEl(config.formId).removeEventListener('submit',searchEvtHandler, false);
+        getEl(config.inputFieldId).removeEventListener('keyup', keyupListener, false);
+      },
+      executeSearch: function() {
+        search(getEl(config.inputFieldId).value);
       }
     }
   }

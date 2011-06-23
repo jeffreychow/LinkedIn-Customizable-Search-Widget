@@ -62,7 +62,7 @@ ul.search-results li.search-result.clicked {
 
 #drop {
   min-height: 100px;
-  width: 200px;
+  width: 400px;
   border: 3px dashed #ccc;
   margin: 10px;
   padding: 10px;
@@ -71,4 +71,12 @@ ul.search-results li.search-result.clicked {
 #template {
   width: 400px;
   height: 200px;
+}
+
+#overlay {
+  position: fixed;
+  background: -moz-linear-gradient(0% 0% 270deg, #FFF, #CCC 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#CCC));
+  right: 0px;
+  top: 7px;
 }

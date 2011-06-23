@@ -10,10 +10,13 @@
     getEl("searchResults").innerHTML = getEl("template").value;
     var currentSearchResult = widget.getCurrentResultsObj();
     initSearchWidget();
-    widget.render(currentSearchResult);
+    widget.executeSearch();
   };
   
   function initSearchWidget() {
+    if(widget) {
+      widget.destroy();
+    }
     widget = new LISearchWidget({
       formId: "li-search-widget",
       inputFieldId : "li-keyword-input",
@@ -37,7 +40,7 @@
       event.preventDefault();
     }
 
-    this.innerHTML += '<p>' + (event.dataTransfer.getData('Text')) + '</p>';
+    this.innerHTML += '<li class="search-result">' + (event.dataTransfer.getData('Text')) + '</li>';
     return false;
   }, false);
 
